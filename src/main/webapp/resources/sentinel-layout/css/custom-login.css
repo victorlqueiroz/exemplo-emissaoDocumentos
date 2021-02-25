@@ -1,0 +1,52 @@
+.dlg-ajax-status {
+    width: 102px !important;
+    box-shadow: none;
+}
+
+.dlg-ajax-status .ui-dialog-content {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.dlg-ajax-status .ui-dialog-titlebar {
+    display: none !important;
+}
+
+.ui-widget-overlay {
+    background: #000;
+}
+
+.login-command {
+    display: table;
+    cursor: pointer;
+    margin: 80px 0 0 10px;
+    border: 1px solid #C0C5C7;
+}
+
+.ui-button-text {
+    background: transparent !important;
+    border: none !important;
+    -webkit-border-radius: 0px !important;
+    box-shadow: none !important;
+}
+
+#login-box .ui-button {
+    background: linear-gradient(to bottom, rgb(228, 115, 39) 0%,
+    rgb(228, 115, 39) 100%);
+    border-bottom-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+}
+
+.ui-tabs-top .ui-tabs-nav {
+    background: transparent linear-gradient(to bottom, #E4CCAB 0%, #C4AC8B 100%) repeat scroll 0% 0%;
+     background: -webkit-linear-gradient(top, #E4CCAB 0%, #C4AC8B 100%) !important;
+ }
+
+#login-box .ui-tabs-nav, #login-box .ui-corner-top, #login-box .ui-state-hover{
+    border: none !important;
+    -webkit-border-radius: 0 0 0 0 !important;;
+    -moz-border-radius: 0 0 0 0 !important;;
+    border-radius: 0 0 0 0 !important;
+}

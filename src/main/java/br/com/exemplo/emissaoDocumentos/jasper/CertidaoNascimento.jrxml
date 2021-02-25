@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
+<!-- 2015-09-09T17:27:58 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CertidaoNascimento" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b555a8ec-78ae-4121-8258-d1cfe26f38b4">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="dataEmissaoExtenso" class="java.lang.String"/>
+	<parameter name="anoRegistro" class="java.lang.String"/>
+	<parameter name="sexo" class="java.lang.String"/>
+	<parameter name="localNascimento" class="java.lang.String"/>
+	<parameter name="dataNascimentoExtenso" class="java.lang.String"/>
+	<parameter name="pai" class="java.lang.String"/>
+	<parameter name="mae" class="java.lang.String"/>
+	<parameter name="diaEmissaoExtenso" class="java.lang.String"/>
+	<parameter name="mesEmissaoExtenso" class="java.lang.String"/>
+	<parameter name="anoEmissaoExtenso" class="java.lang.String"/>
+	<parameter name="identidadePai" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="numeroLivro" class="java.lang.Integer"/>
+	<field name="numeroFolha" class="java.lang.Integer"/>
+	<field name="numeroAta" class="java.lang.Integer"/>
+	<field name="pessoa" class="br.com.exemplo.emissaoDocumentos.model.PessoaFisica"/>
+	<field name="dataEmissao" class="java.util.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="148" splitType="Stretch">
+			<image>
+				<reportElement x="255" y="-10" width="50" height="50" uuid="4a5167f5-8dcc-408b-a7ec-7a9241eab3e9"/>
+				<imageExpression><![CDATA["C:/Desenvolvimento/Exemplo/emissaoDocumentos/Documentos/Imagens/src/BrasaoRepublicaDominicana.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement positionType="Float" x="210" y="38" width="140" height="30" uuid="f623ef1a-9714-41b2-9230-8f0f7bcb51ce"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[REPUBLICA DOMINICANA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="189" y="53" width="180" height="30" uuid="174d5c1f-6b0a-408d-bcef-b3ffac1224dd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JUNTA CENTRAL ELECTORAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="69" width="280" height="30" uuid="ef8cfca5-eae3-45c9-bc94-0cd4aadb9464"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[DIRECCION NACIONAL DE REGISTRO DEL ESTADO CIVIL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="84" width="280" height="30" uuid="6f8da4f5-3614-436b-ab7e-7d564f597076"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[EXTRACTO DE ATA DEL NASCIMIENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="55" width="140" height="53" uuid="1af0b7b7-21ee-4ae7-950d-3a6fc843d1a7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[No. Evento
+001-01-2004-01-00030369
+Mum. O. C. Año Reg. No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="199" y="100" width="170" height="30" uuid="1ca76aad-48de-49f0-9938-a5e186208781"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[(Art. 99 Ley No 659, del 17-07-1944)]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="21" width="50" height="50" uuid="6f69a180-6e7f-47ae-b4f7-5afae3af55fd"/>
+				<imageExpression><![CDATA["C:/Desenvolvimento/Exemplo/emissaoDocumentos/Documentos/Imagens/src/jceLogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="1" y="0" width="100" height="30" uuid="d079a2b2-9208-45a1-a14b-c1545bb1cb31"/>
+				<text><![CDATA[Form. OC - 11]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="106" splitType="Stretch">
+			<staticText>
+				<reportElement x="33" y="0" width="100" height="30" uuid="59cc842f-0d69-498d-b09d-f66948f17eba"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CERTIFICAMOS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="0" width="420" height="20" uuid="d6c37c15-0f9a-4ebd-9ff4-ef192ab64c9b"/>
+				<text><![CDATA[Que en la Oficila del Estado Civil de la IRA. CIRCUNSCRIPCION, DISTRITO NACIONAL,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="20" width="100" height="20" uuid="d8dc4c26-2354-4550-93f7-d41b3843a99f"/>
+				<text><![CDATA[ registrado el]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="40" width="164" height="20" uuid="a4e35854-3e8f-41c1-aa78-1c1c55bde9a8"/>
+				<text><![CDATA[se encuentra inscrito en el Libro No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="40" width="70" height="20" uuid="ceb99a56-ac83-4d94-894a-6075569954f8"/>
+				<text><![CDATA[de registro de ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="40" width="220" height="20" uuid="82f68115-3217-46c7-873f-f96cfd47fde2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NASCIMIENTO, DECLARACIÓN OPORTUNA,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="60" width="47" height="30" uuid="a329bfd9-943b-44d5-9265-69896e1feb9d"/>
+				<text><![CDATA[Folio No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="133" y="60" width="50" height="30" uuid="0cfc4092-62d8-40eb-9539-6995d1dc6860"/>
+				<text><![CDATA[, Acta No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="255" y="60" width="25" height="30" uuid="c91b948d-fb6f-46ea-8bb3-c50ed6a5af22"/>
+				<text><![CDATA[Año]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="332" y="60" width="140" height="30" uuid="86ef121e-1bcb-4150-a9d1-513e8de6df0f"/>
+				<text><![CDATA[, el registro perteneciente a:]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement x="199" y="40" width="56" height="20" uuid="3df6cf7f-9d03-4cd3-ae89-c2b06242e0c1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numeroLivro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="84" y="60" width="40" height="30" uuid="b1c332c6-d6d5-41b1-9f58-8929d7199150"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numeroFolha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="186" y="60" width="60" height="30" uuid="58813ebb-919c-491a-b1c1-50bacfa38dfb"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numeroAta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="18" width="417" height="25" uuid="ef40f4a3-a963-4caf-82d3-75b329f29627"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dataEmissaoExtenso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="285" y="60" width="47" height="30" uuid="8d9d2851-6469-4e3a-9f72-88f9318ef595"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{anoRegistro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="62" splitType="Stretch">
+			<textField>
+				<reportElement x="51" y="10" width="460" height="30" uuid="2d7a4a10-081d-4d14-b7be-f7569a752047"/>
+				<textElement textAlignment="Center">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pessoa}.getNome()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="153" splitType="Stretch">
+			<staticText>
+				<reportElement x="33" y="-3" width="39" height="30" uuid="efc5139e-b416-42d8-840d-cbc9d16da9e3"/>
+				<text><![CDATA[De sexo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="136" y="-3" width="60" height="30" uuid="0b202fee-ff16-4dfa-99b7-a65c4ae67c37"/>
+				<text><![CDATA[, nascido em ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="372" y="-3" width="36" height="30" uuid="ab81dc02-abdf-48c0-b405-f9ae7ad7c9c0"/>
+				<text><![CDATA[, el dia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="30" width="40" height="21" uuid="81110c91-ffc0-4874-b2b1-8d6191ddfbc2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PADRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="253" y="30" width="260" height="21" uuid="ad669cfb-3411-4fd9-9978-8167f1dc30f3"/>
+				<text><![CDATA[pais de nacionalidad Republica Dominicana, ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="51" width="108" height="20" uuid="eb205745-27a4-4d7b-bbcd-57df001fafb8"/>
+				<text><![CDATA[Cédula de Identidad No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="71" width="40" height="21" uuid="bdfa24f5-72ca-4789-a243-2c48ea8fa197"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MADRE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="75" y="-3" width="58" height="30" uuid="2458645f-5af5-48d4-b2a2-0390b8aa0030"/>
+				<textFieldExpression><![CDATA[$P{sexo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="198" y="-3" width="173" height="30" uuid="7a134acd-b08a-4ae0-994b-805f5a2e0928"/>
+				<textFieldExpression><![CDATA[$P{localNascimento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="410" y="-3" width="140" height="30" uuid="505b6fb1-401b-42ff-9807-9bf4a36f75a7"/>
+				<textFieldExpression><![CDATA[$P{dataNascimentoExtenso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="74" y="31" width="176" height="20" uuid="c0639e19-8e7c-4b1c-830e-813b74aff997"/>
+				<textFieldExpression><![CDATA[$P{pai}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="74" y="71" width="176" height="21" uuid="0cbc3fde-7737-4ba4-b103-2f996e091703"/>
+				<textFieldExpression><![CDATA[$P{mae}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="51" width="100" height="20" uuid="f93c821e-bf80-4d4d-8c6d-61fbd1dcba00"/>
+				<textFieldExpression><![CDATA[$P{identidadePai}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement x="50" y="-67" width="460" height="30" uuid="037b4f3a-801f-4737-9271-83944a0a92c8"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[---------------------No más informacion debajo desta línea---------------------]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement x="33" y="-48" width="452" height="20" uuid="d1eedd84-99f9-44c7-bc2e-cd3f5a3607bc"/>
+				<text><![CDATA[El presente documento se expide a petición de la parte interesada en DISTRITO NACIONAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="-28" width="140" height="20" uuid="6df69316-9477-4a0e-8766-4f7fca042ec9"/>
+				<text><![CDATA[Republica Dominicana, hoy dia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="262" y="-28" width="56" height="20" uuid="317bc795-a5b0-4d96-8d75-c240f34121df"/>
+				<text><![CDATA[del mes de]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="175" y="-28" width="87" height="20" uuid="24f97c63-3099-48a8-89a0-c83342428b2c"/>
+				<textElement>
+					<font isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{diaEmissaoExtenso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="319" y="-28" width="110" height="20" uuid="79ebc408-04df-4cfc-a9e7-d2e5874a11a5"/>
+				<textElement>
+					<font isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mesEmissaoExtenso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="74" y="-8" width="129" height="20" uuid="69f18182-2dfc-479e-97a6-e7b2928a6265"/>
+				<textElement>
+					<font isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{anoEmissaoExtenso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="33" y="-8" width="41" height="20" uuid="0f74cea5-3526-40ca-b7eb-c898e055020e"/>
+				<text><![CDATA[del año]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="49" width="197" height="30" uuid="9b10243e-bda4-4361-bc75-09dcf2cc001e"/>
+				<text><![CDATA[____________________________
+OFICIAL DEL ESTADO CIVIL]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="60" splitType="Stretch"/>
+	</summary>
+</jasperReport>

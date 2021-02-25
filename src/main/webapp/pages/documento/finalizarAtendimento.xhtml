@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                template="/pages/template/principal.xhtml">
+
+    <ui:define name="content">
+        <h:outputScript name="jquery/jquery.js" library="primefaces"
+                        target="head"/>
+
+        <div class="ContainerIndent">
+            <h:form>
+
+                <p:panel>
+                    <div class="Container100 Responsive">
+                        <div class="ContainerIndent">
+                            <p:messages autoUpdate="true"/>
+                            <p:fieldset legend="#{label['documento.finalizar']}">
+                                <h:panelGrid columns="6" cellpadding="5">
+                                    <p:commandButton title="#{label['novoDocumento']}"
+                                                     styleClass="GreenButton"
+                                                     icon="fa icon-cancel Fs14 white"
+                                                     value="#{label['novoDocumento']}"
+                                                     actionListener="#{documentoView.reiniciar}"/>
+                                    <p:commandButton title="#{label['finalizar']}"
+                                                     styleClass="RedButton"
+                                                     icon="fa icon-ok Fs14 white" value="#{label['finalizar']}"
+                                                     style="float:right;margin-right:20%"
+                                                     actionListener="#{authenticatorView.logout}"/>
+                                </h:panelGrid>
+                                <p:panel>
+                                    <pe:documentViewer height="425" id="idAnexoCad" rendered="#{documentoView.arquivoPdf != null}"
+                                                       value="#{documentoView.arquivoPdf()}" style="width:80%"/>>
+                                </p:panel>
+                            </p:fieldset>
+                        </div>
+                    </div>
+                </p:panel>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

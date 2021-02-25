@@ -1,0 +1,88 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/template/principal.xhtml">
+
+	<ui:define name="content">
+		<h:outputScript name="jquery/jquery.js" library="primefaces"
+			target="head" />
+		<div class="ContainerIndent">
+
+
+			<p:panel>
+				<div class="Container100 Responsive">
+					<div class="ContainerIndent TexAlCenter">
+						<h:outputText value="#{label['usuario.cadastro']}"
+							styleClass="FontBold Fs18 emissaoDocumentos"></h:outputText>
+					</div>
+				</div>
+				<div class="Container100 Responsive">
+					<div class="ContainerIndent">
+
+						<p:fieldset legend="#{label['usuario.lista']}" class="Responsive"
+							toggleable="true">
+
+							<h:form id="formTable">
+								<p:dataTable id="tbl_usu" var="usu"
+									value="#{usuarioView.tableUsuario.listItem}"
+									selection="#{usuarioView.tableUsuario.selectedItem}"
+									rowKey="#{usu.id}" selectionMode="single" rows="13"
+									paginator="true" paginatorPosition="bottom"
+									emptyMessage="#{label['usuario.emptyMessage']}" reflow="true">
+
+									<p:ajax event="rowSelect" listener="#{usuarioView.editar()}" />
+
+									<f:facet name="header">
+                                        #{label['usuario.lista']}
+                                    </f:facet>
+
+									<p:column headerText="#{label['id']}" sortBy="#{usu.id}"
+										style="width:40px" class="TexAlCenter">
+										<h:outputText value="#{usu.id}" />
+									</p:column>
+
+									<p:column headerText="#{label['nome']}"
+										sortBy="#{usu.pessoa.nome}">
+										<h:outputText value="#{usu.pessoa.nome}" />
+									</p:column>
+
+									<p:column headerText="#{label['email']}"
+										sortBy="#{usu.pessoa.email}">
+										<h:outputText value="#{usu.pessoa.email}" />
+									</p:column>
+
+									<p:column headerText="#{label['pessoa.dataNascimento']}"
+										sortBy="#{usu.pessoa.dataNascimento}"
+										style="text-align: center">
+										<h:outputText value="#{usu.pessoa.dataNascimento}">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:outputText>
+									</p:column>
+
+									<p:column headerText="#{label['dataRegistro']}"
+										sortBy="#{usu.pessoa.dataRegistro}" style="text-align: center">
+										<h:outputText value="#{usu.pessoa.dataRegistro}">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:outputText>
+									</p:column>
+
+									<f:facet name="footer">
+										<p:commandButton value="#{label['usuario.adicionar']}"
+											icon="fa icon-plus-circled Fs14 white"
+											actionListener="#{usuarioView.cleanBean()}"
+											title="Cadastrar novo usuario" process="@this"
+											action="cad_usuario.xhtml" style="margin-right:20px;" />
+
+									</f:facet>
+
+								</p:dataTable>
+							</h:form>
+						</p:fieldset>
+					</div>
+				</div>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

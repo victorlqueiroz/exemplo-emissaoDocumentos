@@ -1,0 +1,169 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/template/principal.xhtml">
+
+	<ui:define name="content">
+		<h:outputScript name="jquery/jquery.js" library="primefaces"
+			target="head" />
+		<div class="ContainerIndent">
+
+
+			<p:panel>
+				<div class="Container100 Responsive">
+					<div class="ContainerIndent TexAlCenter">
+						<h:outputText value="#{label['usuario.cadastro']}"
+							styleClass="FontBold Fs18 emissaoDocumentos"></h:outputText>
+					</div>
+				</div>
+				<div class="Container100 Responsive">
+					<div class="ContainerIndent">
+
+
+
+						<p:fieldset legend="#{label['usuario.cadastro']}"
+							class="Responsive" toggleable="true">
+
+							<h:form id="formTable">
+
+								<p:messages autoUpdate="true"></p:messages>
+
+								<p:fieldset legend="Dados Pessoal">
+
+									<h:panelGrid columns="4" cellpadding="5" >
+										<p:outputLabel value="Tipo Pessoa: " for="tp_pessoa" />
+										<p:selectOneMenu id="tp_pessoa"
+											value="#{usuarioView.tipoPessoa}">
+
+											<f:selectItem itemLabel="FISICA" itemValue="1" />
+											<f:selectItem itemLabel="JURIDICA" itemValue="2" />
+											<p:ajax event="change"
+												listener="#{usuarioView.instancePessoa()}" update="@form"></p:ajax>
+										</p:selectOneMenu>
+
+										<p:commandButton title="Capturar Digital"
+											icon="fa icon-user Fs14 white" immediate="true"
+											action="#{usuarioView.CapturaBiometria()}" update="@form"
+											style="margin-right:100%">
+										</p:commandButton>
+
+										<p:outputLabel value="Digital capturada!"
+											style="color: green; font-size: 25px;"
+											rendered="#{usuarioView.digitalOk}">
+											<i class="icon-ok-circled-green Fs25" />
+										</p:outputLabel>
+
+										<p:outputLabel value="Digital não capturada!"
+											style="color: red; font-size: 25px"
+											rendered="#{!usuarioView.digitalOk}">
+											<i class="icon-cancel-circled-red Fs25 TexAlCenter" />
+										</p:outputLabel>
+
+									</h:panelGrid>
+
+									<h:panelGrid columns="6" cellpadding="5"
+										rendered="#{usuarioView.tipoPessoa == 1}">
+
+										<p:outputLabel value="#{label['nome']} :" for="idNome" />
+										<p:inputText id="idNome" style="width: 250px"
+											value="#{usuarioView.usuario.pessoa.nome}" />
+
+										<p:outputLabel value="#{label['pessoa.cpf']} :" />
+										<p:inputMask mask="999.999.999-99"
+											value="#{usuarioView.usuario.pessoa.cpf}"
+											converter="#{cgcCpfConverter}" />
+
+										<p:outputLabel value="#{label['pessoa.rg']} :" for="idRg" />
+										<p:inputText id="idRg"
+											value="#{usuarioView.usuario.pessoa.documento}" />
+
+										<p:outputLabel value="#{label['email']} :" for="idEmail" />
+										<p:inputText id="idEmail" style="width: 250px"
+											value="#{usuarioView.usuario.pessoa.email}" />
+
+										<p:outputLabel value="#{label['telefone']} :" for="idTelefone" />
+										<p:inputText id="idTelefone" />
+
+										<p:outputLabel value="#{label['pessoa.dataNascimento']} :" />
+										<p:calendar
+											value="#{usuarioView.usuario.pessoa.dataNascimento}"
+											locale="pt_BR" pattern="dd/MM/yyyy" />
+									</h:panelGrid>
+
+									<h:panelGrid columns="4" cellpadding="5"
+										rendered="#{usuarioView.tipoPessoa == 2}">
+
+										<p:outputLabel value="#{label['empresa.razaoSocial']} :"
+											for="idRzSocial" />
+										<p:inputText id="idRzSocial" style="width: 250px"
+											value="#{usuarioView.usuario.pessoa.razaoSocial}" />
+
+										<p:outputLabel value="#{label['empresa.cnpj']} :" />
+										<p:inputMask mask="99.999.999/9999-99" style="width: 150px"
+											value="#{usuarioView.usuario.pessoa.cnpj}"
+											converter="#{cgcCpfConverter}" />
+
+										<p:outputLabel value="#{label['empresa.nomeFantasia']} :"
+											for="idNomeFant" />
+										<p:inputText id="idNomeFant" style="width: 250px"
+											value="#{usuarioView.usuario.pessoa.nomeFantasia}" />
+
+										<p:outputLabel value="#{label['empresa.inscricaoEstadual']} :"
+											for="idInsc" />
+										<p:inputText id="idInsc" style="width: 250px"
+											value="#{usuarioView.usuario.pessoa.inscricaoEstadual}" />
+									</h:panelGrid>
+								</p:fieldset>
+								<p />
+								<p:fieldset legend="#{label['usuario.dados']}">
+									<h:panelGrid columns="2" cellpadding="5">
+										<h:panelGrid columns="6" cellpadding="5">
+
+											<p:outputLabel for="idPerfil"
+												value="#{label['usuario.perfil']} :" />
+
+											<p:selectOneMenu id="idPerfil"
+												value="#{usuarioView.usuario.perfil}"
+												converter="perfilConverter">
+
+												<f:selectItem itemLabel="#{label['selecione']}" itemValue="" />
+												<f:selectItems value="#{usuarioView.listaPerfil}"
+													var="perfil" itemLabel="#{perfil.nome}"
+													itemValue="#{perfil}" />
+											</p:selectOneMenu>
+
+											<h:outputLabel for="pwd1" value="#{label['usuario.senha']} :" />
+											<p:password id="pwd1" value="#{usuarioView.usuario.senha}"
+												match="pwd2" required="true" redisplay="true"
+												validatorMessage="As senhas informadas são diferentes!" />
+
+											<h:outputLabel for="pwd2"
+												value="#{label['usuario.confirmarSenha']} :" />
+											<p:password id="pwd2" value="#{usuarioView.usuario.senha}"
+												required="true" redisplay="true" />
+
+										</h:panelGrid>
+									</h:panelGrid>
+								</p:fieldset>
+								<p />
+								<p:commandButton title="#{label['cancelar']}"
+									icon="fa icon-cancel Fs14 white" value="#{label['cancelar']}"
+									action="#{usuarioView.cancelar}" immediate="true"
+									style="margin-left:10%" />
+
+								<p:commandButton title="#{label['adicionar']}"
+									icon="fa icon-ok Fs14 white" value="#{label['adicionar']}"
+									action="#{usuarioView.saveOrUpdate()}" update="@all"
+									style="margin-left:70%">
+								</p:commandButton>
+
+							</h:form>
+						</p:fieldset>
+					</div>
+				</div>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,158 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/pages/template/principal.xhtml">
+
+    <ui:define name="content">
+        <h:outputScript name="jquery/jquery.js" library="primefaces"
+                        target="head"/>
+        <h:outputStylesheet name="css/custom-keyboard.css"
+                            library="sentinel-layout"/>
+
+        <div class="ContainerIndent">
+            <p:panel style="height: 100%">
+                <div class="Container100 Responsive">
+                    <div class="ContainerIndent TexAlCenter">
+                        <h:outputText value="#{label['documento.escolha']}"
+                                      styleClass="FontBold Fs18 emissaoDocumentos"></h:outputText>
+                    </div>
+                </div>
+                <div class="Container100 Responsive">
+                    <div class="ContainerIndent">
+                        <h:form id="form">
+
+                            <p:messages autoUpdate="true" closable="true"/>
+
+                            <p/>
+                            <p:fieldset styleClass="Responsive">
+                                <p:dataTable id="documentos" var="documento"
+                                             value="#{documentoView.tableDocumento.listItem}"
+                                             selection="#{documentoView.selectMultiple}"
+                                             rowKey="#{documento.id}" rows="10" paginator="true"
+                                             paginatorPosition="bottom"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                             emptyMessage="#{label['documento.emptyMessage']}" reflow="true">
+
+                                    <f:facet name="header">
+                                        #{label['documento.lista']}
+                                    </f:facet>
+
+                                    <p:column headerText="#{label['documento.tipo']}"
+                                              sortBy="#{documento.tipo}">
+                                        <h:outputText
+                                                value="#{documentoView.documento.getTipoDocumento(documento).getDescricao()}"/>
+                                    </p:column>
+                                    <p:column headerText="#{label['pessoa.nome']}"
+                                              sortBy="#{documento.pessoa.nome}">
+                                        <h:outputText value="#{documento.pessoa.nome}"/>
+                                    </p:column>
+                                    <p:column headerText="#{label['documento.quantidade']}"
+                                              style="width:20%">
+                                        <h:outputText value="#{documento.quantidade}"/>
+                                    </p:column>
+                                    <p:column headerText="#{label['pagamento.valor']}"
+                                              style="width:20%;">
+                                        <h:outputText value="#{documento.valor}" styleClass="TexAlLeft"/>
+                                    </p:column>
+                                    <p:column headerText="" style="width:7%">
+                                        <p:commandButton icon="fa icon-minus-circled Fs14 white"
+                                                         style="float:none" styleClass="RedButton"
+                                                         action="#{documentoView.excluirDocumento(documento)}"
+                                                         ajax="false"/>
+                                    </p:column>
+                                </p:dataTable>
+                                <p:fieldset>
+                                    <p:panelGrid>
+                                        <h:outputLabel for="valorTotal" style="font-weight:bold;"
+                                                       value="#{label['pagamento.valorTotal']} :"/>
+                                        <p:inputText id="valorTotal" readonly="true" styleClass="TexAlRight"
+                                                     value="#{documentoView.valorTotal}"/>
+                                    </p:panelGrid>
+                                </p:fieldset>
+
+                                <p/>
+                                <p:fieldset>
+                                    <p:commandButton icon="fa icon-plus-circled Fs14 white"
+                                                     value="Adicionar documento" style="float:right;"
+                                                     styleClass="GreenButton" update=":formDocumento:dlg_documento"
+                                                     actionListener="#{documentoView.novoDocumento()}"
+                                                     oncomplete="PF('dlgDocumento').show();"/>
+                                </p:fieldset>
+
+                                <fieldset
+                                        style="position: fixed; left: 0px; bottom: 10px; width: 95%; height: 50px; border: 0px;">
+                                    <p:commandButton id="nextPagamento" value="#{label['continuar']}"
+                                                     icon="fa icon-right-big Fs14 white" style="float:right;"
+                                                     styleClass="OrangeButton"
+                                                     actionListener="#{documentoView.nextPagamento}"/>
+                                </fieldset>
+                            </p:fieldset>
+                        </h:form>
+                        <h:form id="formDocumento" styleClass="Fs25">
+                            <p:dialog header="#{label['documento.adicionar']}" onHide="false"
+                                      visible="#{documentoView.exibirDialog}" resizable="false" widgetVar="dlgDocumento"
+                                      id="dlg_documento" modal="true" styleClass="Fs25"
+                                      closeOnEscape="true" style="left: 10px; !important;">
+                                <div class="Container100 Responsive">
+                                    <div class="ContainerIndent">
+                                        <p:messages autoUpdate="true"></p:messages>
+
+                                        <p/>
+                                        <p:fieldset legend="#{label['documento.dados']}" styleClass="Fs25">
+                                            <h:panelGrid columns="2" cellpadding="5">
+
+                                                <p:outputLabel for="tipoDocumento" styleClass="Fs25"
+                                                               value="#{label['documento.tipo']}* :"/>
+                                                <p:selectOneRadio id="tipoDocumento" styleClass="Fs25"
+                                                                  value="#{documentoView.tipoDocumento}" layout="grid"
+                                                                  columns="1">
+
+                                                    <p:ajax event="change"
+                                                            update=":formDocumento:pessoaVinculo"
+                                                            listener="#{documentoView.onChangeTipoDocumento(documentoView.tipoDocumento)}"/>
+                                                    <f:selectItems var="tipo" styleClass="Fs25"
+                                                                   value="#{documentoView.tipoDocumentoEnum}"
+                                                                   itemLabel="#{tipo.descricao}" itemValue="#{tipo}"/>
+                                                </p:selectOneRadio>
+                                                <h:outputLabel for="pessoaVinculo" styleClass="Fs25"
+                                                               value="#{label['documento.pessoa']}* :"/>
+                                                <p:selectOneMenu id="pessoaVinculo"
+                                                                 converter="#{pessoaConverter}"
+                                                                 value="#{documentoView.pessoa}"
+                                                                 styleClass="Container100 Fs25">
+                                                    <f:selectItems
+                                                            value="#{documentoView.listaPessoaVinculada}" var="pessoa"
+                                                            styleClass="Fs25"
+                                                            itemLabel="#{pessoa.nome}" itemValue="#{pessoa}"/>
+                                                </p:selectOneMenu>
+                                                <h:outputLabel for="quantidade" styleClass="Fs25"
+                                                               value="#{label['documento.quantidade']}* :"/>
+                                                <p:keyboard id="quantidade" keypadOnly="true" styleClass="Fs25"
+                                                            value="#{documentoView.documento.quantidade}"/>
+                                            </h:panelGrid>
+                                        </p:fieldset>
+
+                                        <p/>
+                                        <p:commandButton title="#{label['adicionar']}"
+                                                         icon="fa icon-ok Fs14 white" value="#{label['adicionar']}"
+                                                         style="float:right" styleClass="GreenButton"
+                                                         onclick="PF('dlgDocumento').hide();"
+                                                         process=":formDocumento:dlg_documento"
+                                                         update=":form:documentos" ajax="false"
+                                                         action="#{documentoView.inserirDocumentoLista()}"/>
+                                        <p:commandButton type="button" title="#{label['cancelar']}"
+                                                         styleClass="RedButton" icon="fa icon-cancel Fs14 white"
+                                                         value="#{label['cancelar']}"
+                                                         onclick="PF('dlgDocumento').hide();"/>
+                                    </div>
+                                </div>
+                            </p:dialog>
+                        </h:form>
+                    </div>
+                </div>
+            </p:panel>
+        </div>
+    </ui:define>
+</ui:composition>

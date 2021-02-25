@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <div id="layout-header" class="Unselectable fontRegular">
+        <a href="#" id="layout-logo"> <h:graphicImage style="height: 40px !important"
+                value="/resources/images/jce.png" styleClass="Fleft MarRight10"
+                library="sentinel-layout"/><span
+                class="Fs22 FontTitilliumSemiBoldItalic Fleft MarTop10"><span
+                class="emissaoDocumentos"> Emissao Documentos</span></span>
+        </a>
+        <h:form>
+            <ul id="sm-topmenu" class="layout-header-widgets white Fs14">
+                <li class="Fleft BordRadHalf TexAlCenter"><i
+                        class="icon-user-male "></i>
+                    <ul
+                            class="layout-header-widgets-submenu BordRad5 shadows white Animated05">
+                        <li class="Animated05"><p:commandLink
+                                styleClass="ui-commandlink-alternative"
+                                actionListener="#{authenticatorView.logout()}">
+                            <i class="icon-power"/>#{label['logout']}</p:commandLink></li>
+                    </ul>
+                </li>
+            </ul>
+        </h:form>
+        <!-- NEVER REMOVE FOLLOWING 'UL' TAG ! BECAUSE THIS CONTAINS RESPONSIVE MODE HEADER MENU OPEN-CLOSE BUTTON -->
+        <ul id="sm-mobiletopmenu" class="layout-header-widgets white Fs14">
+            <li
+                    class="Fleft BordRadHalf TexAlCenter Animated05 DisplayOnResponsive"><i
+                    class="icon-th-1"></i></li>
+        </ul>
+        <!-- ****** -->
+    </div>
+</ui:composition>

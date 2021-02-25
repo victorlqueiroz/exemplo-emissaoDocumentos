@@ -1,0 +1,14 @@
+.keypad-key {
+    width: 65px !important;
+    font-size: 20px !important;
+    height: 65px;
+}
+.keypad-spacebar {
+    width: 800px!important;
+}
+.keypad-close, .keypad-clear, .keypad-back{
+    font-size: 13px !important;
+}
+.position-numeric {
+    left: 37% !important;
+}

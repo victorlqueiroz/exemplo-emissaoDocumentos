@@ -1,0 +1,141 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/pages/template/principal.xhtml"
+                xmlns:comp="http://java.sun.com/jsf/composite/componente">
+
+    <ui:define name="content">
+        <h:outputScript name="jquery/jquery.js" library="primefaces"
+                        target="head"/>
+        <h:outputStylesheet name="css/custom-keyboard.css"
+                            library="sentinel-layout"/>
+
+        <div class="ContainerIndent">
+
+            <h:form id="form" enctype="multipart/form-data">
+                <p:panel>
+                    <div class="Container100 Responsive">
+                        <div class="ContainerIndent TexAlCenter">
+                            <h:outputText value="#{label['pagamento.cabecalho']}"
+                                          styleClass="FontBold Fs18 emissaoDocumentos"></h:outputText>
+                            <p:messages autoUpdate="true" closable="true" escape="false"/>
+                        </div>
+                    </div>
+                    <div class="Container100 Responsive">
+                        <div class="ContainerIndent">
+                            <p:fieldset legend="#{label['pagamento.cartaoCredito']}">
+
+                                <h:panelGrid columns="1" cellpadding="3" border="0">
+                                    <p:selectOneRadio id="operadoraCartaoCredito"
+                                                      value="#{documentoView.cartaoCredito.operadoraCartaoCredito}">
+
+                                        <f:selectItems var="operadora"
+                                                       value="#{documentoView.cartaoCredito.getListaOperadoraCartaoCredito()}"
+                                                       itemLabel="#{operadora.descricao}" itemValue="#{operadora}">
+                                            <p:column>
+                                                <p:graphicImage value="/resources/images/#{operadora.names()}.png"
+                                                                for="visa"
+                                                                width="40" height="30"/>
+                                            </p:column>
+                                        </f:selectItems>
+                                    </p:selectOneRadio>
+
+                                    <h:panelGrid columns="2">
+                                        <p:outputLabel value="#{label['pagamento.numero']} :"
+                                                       for="numero"/>
+                                        <p:keyboard id="numero"
+                                                    value="#{documentoView.cartaoCredito.numero}" maxlength="16"
+                                                    keypadOnly="true"
+                                                    clearLabel="#{label['keyboard.layout.clear']}"
+                                                    backspaceLabel="#{label['keyboard.layout.backspace']}"
+                                                    closeLabel="#{label['keyboard.layout.close']}"
+                                                    styleClass="Container9 Fnone MarAuto Fs18"/>
+
+                                        <p:outputLabel
+                                                value="#{label['pagamento.proprietarioCartao']} :"
+                                                for="proprietario"/>
+                                        <p:keyboard id="proprietario" layout="custom"
+                                                    value="#{documentoView.cartaoCredito.proprietario}"
+                                                    clearLabel="#{label['keyboard.layout.clear']}"
+                                                    backspaceLabel="#{label['keyboard.layout.backspace']}"
+                                                    closeLabel="#{label['keyboard.layout.close']}"
+                                                    layoutTemplate="#{label['keyboard.layout']}"
+                                                    styleClass="Container120 Fnone MarAuto Fs18"/>
+
+                                        <p:outputLabel value="#{label['pagamento.codigoValidacao']} :"
+                                                       for="codigoValidacao"/>
+
+                                        <p:keyboard id="codigoValidacao"
+                                                    value="#{documentoView.cartaoCredito.codigoValidacao}"
+                                                    maxlength="3" keypadOnly="true"
+                                                    clearLabel="#{label['keyboard.layout.clear']}"
+                                                    backspaceLabel="#{label['keyboard.layout.backspace']}"
+                                                    closeLabel="#{label['keyboard.layout.close']}"
+                                                    styleClass="Container30 Fnone MarAuto Fs18"/>
+                                        <p:outputLabel value="#{label['pagamento.mes']} :"
+                                                       for="mes"/>
+                                        <p:keyboard id="mes"
+                                                    value="#{documentoView.cartaoCredito.mes}" maxlength="2"
+                                                    keypadOnly="true"
+                                                    clearLabel="#{label['keyboard.layout.clear']}"
+                                                    backspaceLabel="#{label['keyboard.layout.backspace']}"
+                                                    closeLabel="#{label['keyboard.layout.close']}"
+                                                    styleClass="Container30 Fnone MarAuto Fs18"/>
+                                        <p:outputLabel value="#{label['pagamento.ano']} :"
+                                                       for="ano"/>
+                                        <p:keyboard id="ano"
+                                                    value="#{documentoView.cartaoCredito.ano}" maxlength="4"
+                                                    keypadOnly="true"
+                                                    clearLabel="#{label['keyboard.layout.clear']}"
+                                                    backspaceLabel="#{label['keyboard.layout.backspace']}"
+                                                    closeLabel="#{label['keyboard.layout.close']}"
+                                                    styleClass="Container30 Fnone MarAuto Fs18"/>
+
+                                    </h:panelGrid>
+
+                                </h:panelGrid>
+                            </p:fieldset>
+
+                            <p/>
+                            <p:fieldset legend="#{label['pagamento.payPal']}">
+                                <h:panelGrid columns="6" cellpadding="5">
+                                    <p:outputLabel value="#{label['pagamento.login']} :"
+                                                   for="login"/>
+                                    <p:keyboard id="login" maxlength="20" keypadOnly="true"
+                                                styleClass="Container80 Fnone MarAuto Fs18"/>
+                                    <p:outputLabel value="#{label['pagamento.senha']} :"
+                                                   for="senha"/>
+                                    <p:keyboard id="senha" maxlength="20" keypadOnly="true"
+                                                styleClass="Container80 Fnone MarAuto Fs18"/>
+                                    <p:commandButton title="#{label['confirmar']}"
+                                                     icon="fa icon-ok Fs14 white" value="#{label['entrar']}"
+                                                     style="float:right"/>
+                                </h:panelGrid>
+                            </p:fieldset>
+
+                            <p/>
+                            <p:fieldset>
+                                <p:panelGrid>
+                                    <h:outputLabel for="valorTotal" style="font-weight:bold;"
+                                                   value="#{label['pagamento.valorTotal']} :"/>
+                                    <p:inputText id="valorTotal" readonly="true" styleClass="TexAlRight"
+                                                 value="#{documentoView.valorTotal}"/>
+                                </p:panelGrid>
+                            </p:fieldset>
+                        </div>
+                    </div>
+                </p:panel>
+                <fieldset style="position: fixed; left: 0px; bottom: 10px; width: 98%; height: 50px; border: 0px;">
+                    <p:commandButton icon="fa icon-right-big Fs14 white" value="#{label['continuar']}"
+                                     style="float:right;" styleClass="OrangeButton"
+                                     actionListener="#{documentoView.nextImpressao}"/>
+                    <p:commandButton icon="fa icon-left-big Fs14 white" value="#{label['voltar']}"
+                                     style="float:left;" styleClass="OrangeButton"
+                                     actionListener="#{documentoView.backDocumento}"/>
+                </fieldset>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

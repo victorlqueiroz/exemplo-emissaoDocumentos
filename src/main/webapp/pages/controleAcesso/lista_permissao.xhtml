@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/template/principal.xhtml">
+
+	<ui:define name="content">
+		<h:outputScript name="jquery/jquery.js" library="primefaces"
+			target="head" />
+		<div class="ContainerIndent">
+
+			<p:panel>
+				<div class="Container100 Responsive">
+					<div class="ContainerIndent TexAlCenter">
+						<h:outputText value="#{label['permissao.cadastro']}"
+							styleClass="FontBold Fs18 emissaoDocumentos"></h:outputText>
+					</div>
+				</div>
+				<div class="Container100 Responsive">
+					<div class="ContainerIndent">
+						<p />
+						<p:fieldset legend="#{label['permissao.lista']}"
+							class="Responsive" toggleable="true">
+
+							<h:form id="formPermi">
+								<p:dataTable id="tbl_permissao" var="permissao"
+									value="#{permissaoView.permissaoTable.listItem}"
+									selection="#{permissaoView.permissaoTable.selectedItem}"
+									rowKey="#{permissao.id}" selectionMode="single" rows="13"
+									paginator="true" paginatorPosition="bottom"
+									emptyMessage="#{label['permissao.emptyMessage']}" reflow="true">
+
+									<p:ajax event="rowSelect" listener="#{permissaoView.editar()}" />
+
+									<f:facet name="header">
+	                                 	#{label['permissao.lista']}
+	                             	</f:facet>
+
+									<p:column headerText="#{label['id']}" sortBy="#{permissao.id}"
+										style="width:40px" class="TexAlCenter">
+										<h:outputText value="#{permissao.id}" />
+									</p:column>
+
+									<p:column headerText="Nome" sortBy="#{permissao.nome}">
+										<h:outputText value="#{permissao.nome}" />
+									</p:column>
+
+									<p:column headerText="Valor" sortBy="#{permissao.valor}">
+										<h:outputText value="#{permissao.valor}" />
+									</p:column>
+
+									<p:column headerText="Descrição"
+										sortBy="#{permissao.descricao}">
+										<h:outputText value="#{permissao.descricao}" />
+									</p:column>							
+
+									<f:facet name="footer">
+										<p:commandButton value="#{label['permissao.adicionar']}"
+											icon="fa icon-plus-circled Fs14 white"
+											title="#{label['permissao.adicionar']}"
+											actionListener="#{permissaoView.init()}"
+											process="@this" action="cad_permissao.xhtml"
+											style="margin-right:20px;" />
+									</f:facet>
+								</p:dataTable>
+							</h:form>
+						</p:fieldset>
+					</div>
+				</div>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

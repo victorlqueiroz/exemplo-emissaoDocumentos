@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+    </f:facet>
+    <title>#{label['headerTitle']}</title>
+    <h:outputScript name="js/layout.js" library="sentinel-layout"/>
+    <h:outputScript name="js/jquery.keyboard.js" library="sentinel-layout"/>
+    <h:outputScript name="js/jquery-ui.min.js" library="sentinel-layout"/>
+    <h:outputStylesheet name="css/jquery-ui.css" library="sentinel-layout"/>
+    <h:outputStylesheet name="css/keyboard.css" library="sentinel-layout"/>
+    <ui:insert name="head"/>
+
+    <script type="text/javascript" language="JavaScript">
+        var $ = jQuery;
+        $(document).ready(function () {
+            $("input[id*='Date']").mask('99/99/9999');
+        });
+    </script>
+
+    <style>
+        .dlg-ajax-status {
+            /*visibility: hidden !important;*/
+            width: 102px !important;
+            box-shadow: none;
+        }
+
+        .dlg-ajax-status .ui-dialog-content {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .dlg-ajax-status .ui-dialog-titlebar {
+            display: none !important;
+        }
+
+        .ui-widget-overlay {
+            background: #000;
+        }
+    </style>
+
+</h:head>
+
+<h:body>
+    <f:view>
+        <ui:include src="topbar.xhtml"/>
+
+        <div id="layout-portlets-cover" class="fontRegular">
+            <ui:insert name="content">
+
+                <div class="ContainerIndent">
+                    <p:panel>
+                        <div class="Container100 Responsive">
+                            <div class="ContainerIndent TexAlCenter">
+                                <h:outputText value="CONTEUDO"
+                                              styleClass="FontBold Fs18 emissaoDocumentos"></h:outputText>
+
+                                <h:form>
+                                    <h:outputText value="#{label['linguagem']}"/>
+                                    <h:commandLink action="#{InternacionalizacaoMB.mudarIdioma}">
+                                        <h:graphicImage value="/imagens/flagBrasil.png"
+                                                        style="border:none"/>
+                                        <f:setPropertyActionListener value="pt"
+                                                                     target="#{InternacionalizacaoMB.linguagem}"/>
+                                        <f:setPropertyActionListener value="BR"
+                                                                     target="#{InternacionalizacaoMB.pais}"/>
+                                    </h:commandLink>
+                                    <h:commandLink action="#{InternacionalizacaoMB.mudarIdioma}">
+                                        <h:graphicImage value="/imagens/popupBlueArrow.png"
+                                                        style="border:none"/>
+                                        <f:setPropertyActionListener value="en"
+                                                                     target="#{InternacionalizacaoMB.linguagem}"/>
+                                        <f:setPropertyActionListener value="US"
+                                                                     target="#{InternacionalizacaoMB.pais}"/>
+                                    </h:commandLink>
+                                    <h:commandLink action="#{InternacionalizacaoMB.mudarIdioma}">
+                                        <h:graphicImage value="/imagens/popupBlueArrow.png"
+                                                        style="border:none"/>
+                                        <f:setPropertyActionListener value="es"
+                                                                     target="#{InternacionalizacaoMB.linguagem}"/>
+                                    </h:commandLink>
+                                </h:form>
+                            </div>
+                        </div>
+                    </p:panel>
+                </div>
+
+            </ui:insert>
+        </div>
+        <!-- PRE-LOADER -->
+        <p:ajaxStatus onstart="PF('statusDialog').show()"
+                      onsuccess="PF('statusDialog').hide()"/>
+
+        <p:dialog modal="true" widgetVar="statusDialog" header="Carregando..."
+                  styleClass="dlg-ajax-status"
+                  style="background: transparent; border:none; width: 102px"
+                  draggable="false" closable="false" resizable="false">
+            <h:graphicImage value="/resources/images/loading.gif" width="100"
+                            height="100"/>
+            <p:outputLabel value="Carregando..."
+                           style="text-align: center; width: 100px; margin: 0 !important; color: #fff"/>
+        </p:dialog>
+
+        <h:outputStylesheet name="css/font-icon-layout.css"
+                            library="sentinel-layout"/>
+        <h:outputStylesheet name="css/sentinel-layout.css"
+                            library="sentinel-layout"/>
+        <h:outputStylesheet name="css/core-layout.css"
+                            library="sentinel-layout"/>
+    </f:view>
+</h:body>
+
+</html>

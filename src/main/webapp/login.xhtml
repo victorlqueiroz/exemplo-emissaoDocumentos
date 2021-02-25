@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>#{label['headerTitle']}</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+
+    <h:outputScript name="js/login.js" library="sentinel-layout"/>
+    <h:outputStylesheet name="css/font-icon-layout.css"
+                        library="sentinel-layout"/>
+    <h:outputStylesheet name="css/sentinel-layout.css"
+                        library="sentinel-layout"/>
+    <h:outputStylesheet name="css/core-layout.css"
+                        library="sentinel-layout"/>
+    <h:outputStylesheet name="css/custom-login.css"
+                        library="sentinel-layout"/>
+    <h:outputStylesheet name="css/custom-keyboard.css"
+                        library="sentinel-layout"/>
+</h:head>
+
+<h:body class="fontRegular login-back white-back">
+    <div class="EmptyBox100"></div>
+    <p:ajaxStatus id="emissaoDocumentos_status" onstart="PF('statusDialog').show()"
+                  oncomplete="PF('statusDialog').hide()"/>
+
+    <p:dialog modal="true" widgetVar="statusDialog" header="Carregando..."
+              styleClass="dlg-ajax-status"
+              style="background: transparent; border:none;" draggable="false"
+              closable="false" resizable="false">
+        <h:graphicImage value="/resources/images/loading.gif" height="100"/>
+        <p:outputLabel value="Aguardando Digital..."
+                       style="text-align: center; width: 100px; margin: 0 !important; color: #fff"/>
+    </p:dialog>
+
+    <!-- LOGIN BOX COVER START -->
+    <h:form id="formLogin">
+        <div class="Container80 MaxWid750 white-back Fnone MarAuto"
+             id="login-box">
+            <p:tabView
+                    style=" display: table !important; width: 100%; height: 300px !important; border: none !important">
+                <p:tab title="#{label['login.tab1']}">
+                    <p:graphicImage styleClass="Fleft" style="margin: 20px 30px 0px 30px !important;"
+                                    value="resources/images/logo-1000x1000.png" width="200px"/>
+
+                    <div class="Fleft">
+
+                        <p:messages id="msg" autoUpdate="true"/>
+
+                        <div class="Fnone TexAlCenter TabContent FLeft" id="TAB1">
+                            <div style="width: 350px !important; height: 240px !important;">
+                                <div class="Fleft" style="width: 250px">
+                                    <p:outputLabel value="#{label['login.numeroCelulaJCE']}"
+                                                   for="numeroCedulaJCE" styleClass="Container80 Fnone MarAuto Fs18"/>
+
+                                    <p/>
+
+                                    <p:keyboard id="numeroCedulaJCE" value="#{authenticatorView.usuario.numeroJCE}"
+                                                maxlength="11" keypadOnly="true" size=""
+                                                clearLabel="#{label['keyboard.layout.clear']}"
+                                                backspaceLabel="#{label['keyboard.layout.backspace']}"
+                                                closeLabel="#{label['keyboard.layout.close']}"
+                                                styleClass="Container9 Fnone MarAuto Fs18 position-numeric"/>
+
+                                    <p/>
+                                    #{label['ou']}
+                                    <p/>
+                                    <p:keyboard placeholder="#{label['login.primeiroNome']}"
+                                                value="#{authenticatorView.usuario.primeiroNome}" layout="custom"
+                                                clearLabel="#{label['keyboard.layout.clear']}"
+                                                backspaceLabel="#{label['keyboard.layout.backspace']}"
+                                                closeLabel="#{label['keyboard.layout.close']}"
+                                                layoutTemplate="#{label['keyboard.layout']}"
+                                                styleClass="Container9 Fnone MarAuto Fs18 position-alphanumeric"/>
+
+                                    <div class="EmptyBox10"></div>
+
+                                    <p:keyboard placeholder="#{label['login.segundoNome']}"
+                                                value="#{authenticatorView.usuario.segundoNome}" layout="custom"
+                                                clearLabel="#{label['keyboard.layout.clear']}"
+                                                backspaceLabel="#{label['keyboard.layout.backspace']}"
+                                                closeLabel="#{label['keyboard.layout.close']}"
+                                                layoutTemplate="#{label['keyboard.layout']}"
+                                                styleClass="Container9 Fnone MarAuto Fs18 position-alphanumeric"/>
+                                </div>
+                                <div class="Fleft">
+                                    <h:commandLink title="#{label['login.biometria']}" value=""
+                                                   update=":formLogin:msg" styleClass="login-command"
+                                                   actionListener="#{authenticatorView.loginByBiometria}">
+                                        <img src="resources/images/biometria.jpg" height="80"/>
+                                    </h:commandLink>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </p:tab>
+                <p:tab title="#{label['login.tab2']}">
+                    <p:graphicImage styleClass="Fleft" style="margin: 20px 30px 0px 30px !important;"
+                                    value="resources/images/logo-1000x1000.png" width="200px"/>
+
+                    <div class="Fleft">
+                        <p:messages id="msg2" autoUpdate="true"/>
+                        <div class="FLeft" style="padding-top: 50px" id="TAB2">
+                            <p:outputLabel value="#{label['login.chave']}"
+                                           for="chaveImpressao" styleClass="Container80 Fnone MarAuto Fs18"/>
+                            <p/>
+                            <p:keyboard id="chaveImpressao" value="#{authenticatorView.chave}"
+                                        maxlength="30" keypadOnly="true" size="28"
+                                        clearLabel="#{label['keyboard.layout.clear']}"
+                                        backspaceLabel="#{label['keyboard.layout.backspace']}"
+                                        closeLabel="#{label['keyboard.layout.close']}"
+                                        style="float: left !important; margin-right: 10px !important;"
+                                        styleClass="Container9 Fnone MarAuto Fs18 position-numeric"/>
+
+                            <h:commandLink title="#{label['login.biometria']}" value=""
+                                           style="float: left !important; margin: 0 !important;"
+                                           update=":formLogin:msg">
+                                <img src="resources/images/printer-icon.png" height="50"/>
+                            </h:commandLink>
+                        </div>
+                    </div>
+                </p:tab>
+            </p:tabView>
+        </div>
+    </h:form>
+    <!-- LOGIN BOX COVER END -->
+
+</h:body>
+<!-- </f:view> -->
+</html>
